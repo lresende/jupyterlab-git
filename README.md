@@ -101,7 +101,6 @@ cd jupyterlab-git
 
 # Install the server extension in development mode and enable it
 pip install -e .[test]
-jupyter serverextension enable --py jupyterlab_git
 
 # Build the labextension and dev-mode link it to jlab
 jlpm build

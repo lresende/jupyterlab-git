@@ -6,7 +6,7 @@ import {
   showDialog,
   showErrorMessage
 } from '@jupyterlab/apputils';
-import { ISettingRegistry } from '@jupyterlab/coreutils';
+import { ISettingRegistry } from '@jupyterlab/settingregistry';
 import { FileBrowser } from '@jupyterlab/filebrowser';
 import { ITerminal } from '@jupyterlab/terminal';
 import { IGitExtension } from './tokens';

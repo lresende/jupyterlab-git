@@ -12,6 +12,7 @@ from setupbase import (
 )
 
 import setuptools
+from setuptools.command.develop import develop
 
 # The name of the project
 name='jupyterlab_git'
@@ -38,9 +39,36 @@ def runPackLabextension():
             pass
 pack_labext = command_for_func(runPackLabextension)
 
+class DevelopAndEnable(develop):
+    def run(self):
+        develop.run(self)
+
+        list_cmd = [
+            'jupyter',
+            'serverextension',
+            'list'
+        ]
+        enable_cmd = [
+            'jupyter',
+            'serverextension',
+            'enable',
+            '--py',
+            'jupyterlab_git'
+        ]
+
+        # test if `jupyter` cmd is available
+        try:
+            run(list_cmd)
+        except:
+            print('`jupyter` cmd not installed, skipping serverextension activation...')
+            return
+
+        print('Enabling serverextension...')
+        run(enable_cmd)
+
 cmdclass = create_cmdclass('pack_labext', data_files_spec=data_files_spec)
 cmdclass['pack_labext'] = pack_labext
-cmdclass.pop('develop')
+cmdclass['develop'] = DevelopAndEnable
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
@@ -71,14 +99,14 @@ setup_args = dict(
     ],
     install_requires = [
         'notebook',
-        'nbdime >= 1.1.0, < 2.0.0',
+        'nbdime >= 2.0.0',
         'pexpect'
     ],
     extras_require = {
         'test': [
             'pytest',
             'pytest-asyncio',
-            'jupyterlab~=1.1',
+            'jupyterlab~=2.0',
         ],
     },
 )

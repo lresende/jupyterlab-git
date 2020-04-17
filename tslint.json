@@ -14,6 +14,13 @@
     "comment-format": [true, "check-space"],
     "curly": true,
     "forin": false,
+    "import/order": [
+      "error",
+      {
+        "alphabetize": { "order": "asc", "caseInsensitive": true },
+        "newlines-between": "always-and-inside-groups"
+      }
+    ],
     "interface-name": [true, "always-prefix"],
     "jsdoc-format": true,
     "label-position": true,
